@@ -1,0 +1,242 @@
+/* width */
+::-webkit-scrollbar {
+        width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+        background: none;
+
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+        background: rgb(57, 57, 57);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+        background: rgba(50, 50, 51, 0.809);
+}
+
+* {
+        margin: 0;
+        padding: 0;
+        /* box-sizing: border-box; */
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+}
+
+
+/* CSS */
+button {
+        background-color: #0038c5;
+        border-radius: 4px;
+        border-style: none;
+        box-sizing: border-box;
+        color: #fff;
+        cursor: pointer;
+        display: inline-block;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 1.5;
+        margin: 0;
+        max-width: none;
+        min-height: 44px;
+        min-width: 10px;
+        outline: none;
+        overflow: hidden;
+        padding: 9px 20px 8px;
+        position: relative;
+        text-align: center;
+        text-transform: none;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        width: 100%;
+}
+
+button:hover,
+button:focus {
+        opacity: .75;
+}
+
+body {
+        background-color: #1e212d;
+        color: #e7e6e1;
+        /* height: 1100px; */
+        width: 700px;
+        display: flex;
+        margin: 10px;
+        /* justify-content: space-around; */
+        flex-direction: column;
+        overflow-x: hidden;
+        overflow-y: hidden;
+}
+
+/* table {
+        border-collapse: collapse;
+        text-align: center;
+}
+
+.firstLine {
+        text-align: start;
+}
+
+.firstLine th {
+        border-bottom: 2px outset rgba(255, 255, 255, 0.323);
+        padding-bottom: 1px;
+}
+
+tr {
+        padding-bottom: 1px;
+} */
+
+/* tr {
+        border-top: 1px black;
+        font-size: 18px;
+}
+
+.tabname {
+        width: 150px;
+        font-size: 20px;
+}
+
+.tabmem {
+        width: 30px;
+        padding-left: 30px;
+        font-size: 20px;
+
+}
+
+#tablist {
+        width: 100%;
+        border: black 1px;
+        padding-top: 10px;
+        overflow-y: scroll;
+} */
+
+#tablist {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+}
+
+#tablist td,
+#tablist th {
+        border: 1px solid #ddd;
+        padding: 8px;
+        min-width: 7px;
+}
+
+#tablist tr:nth-child(even) {
+        background-color: #0a0909;
+}
+
+#tablist tr:hover {
+        background-color: #010101;
+}
+
+#tablist th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #04AA6D;
+        color: white;
+        min-width: 7px;
+}
+
+.headerrow {
+        padding: 0.1rem 2rem 0.5rem 0rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 2px outset rgba(255, 255, 255, 0.323);
+}
+
+
+.swithcont {
+        height: 30px;
+}
+
+.tablistcont {
+        margin-top: 1rem;
+        width: 100%;
+
+}
+
+.hide {
+        display: none;
+}
+
+.headerow {
+        display: inline;
+        font-size: medium;
+}
+
+.logo {
+        width: 50px;
+        height: 50px;
+        margin-left: 28px;
+}
+
+
+
+/* td {
+        overflow: hidden;
+        white-space: nowrap;
+} */
+
+
+
+/* .clock {
+        width: 10px;
+        max-width: 10px;
+        columns: grey;
+} */
+
+.clockimg {
+        width: 20px;
+        max-width: 20px;
+
+}
+
+
+.time_schelude {
+        width: fit-content;
+
+}
+
+
+.timein {
+        /* max-height: 50px; */
+        margin-top: 4rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        font-size: 18px;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+}
+
+svg {
+        display: none;
+}
+
+.tabber {
+        position: relative;
+        display: flex;
+        align-items: stretch;
+        justify-content: stretch;
+        margin-top: 15px;
+
+}
+
+.time_setter {
+        line-height: 1.5;
+        height: 44px;
+        width: 10rem;
+        margin-right: 2rem;
+        font-size: 18px;
+        font-stretch: extra-expanded;
+}

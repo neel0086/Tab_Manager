@@ -1,0 +1,52 @@
+<!-- window.resizeBy(60px,600px) -->
+<!-- <html xmlns="http://www.w3.org/1999/xhtml"> -->
+
+</html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="UTF-8">
+        <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+        <title>Document</title>
+
+      
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap" rel="stylesheet">
+        <link href="stylesheet.css" rel="stylesheet">
+        <!-- aka comment polo's links and added bootstrap + google fonts links -->
+
+</head>
+
+<body>
+        <div class="headerrow">
+                <img src="logo.png" alt="logo" class="logo">
+                <h1>Tab Manager</h1>
+                <div class="sortbtcont">
+                        <button id="sortbt" class="btn btn-info">Sort Tabs</button>
+                </div>
+        </div>
+
+        <div class="tablistcont">
+
+                <table id="tablist">
+                        <tr class="firstLine">
+                                <th class="clock">Clock</th>
+                                <th class="tabname">Tab Name</th>
+                                <th class="tabmem">Memory</th>
+                        </tr>
+
+                </table>
+        </div>
+        <div class="closetimecont">
+                <div class="timein">
+                        <input type="time" id="timeform" class="time_setter">
+                        <button id="scheduleclose" class="time_schelude">Schelude</button>
+                </div>
+                <div id="warningplaceholder"></div>
+        </div>
+</body>
+<script src="popup.js"></script>
+
+</html>
