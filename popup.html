@@ -11,7 +11,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
         <title>Document</title>
 
-      
+
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap" rel="stylesheet">
         <link href="stylesheet.css" rel="stylesheet">
@@ -24,7 +24,14 @@
                 <img src="logo.png" alt="logo" class="logo">
                 <h1>Tab Manager</h1>
                 <div class="sortbtcont">
-                        <button id="sortbt" class="btn btn-info">Sort Tabs</button>
+                        <button id="sort_option" class="btn btn-info">Sort Tabs</button>
+
+                        <div class="dropdown-content">
+                                <a href="#" id="sortbt" class="btn btn-info">Sort By Mem</a>
+                                <a href="#" id="sortByTime">Sort By Time</a>
+                                <!-- <a href="#">Link 2</a> -->
+                                <!-- <a href="#">Link 3</a> -->
+                        </div>
                 </div>
         </div>
 
@@ -34,6 +41,7 @@
                         <tr class="firstLine">
                                 <th class="clock">Clock</th>
                                 <th class="tabname">Tab Name</th>
+                                <th class="tabtime">Creation Time</th>
                                 <th class="tabmem">Memory</th>
                         </tr>
 

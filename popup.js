@@ -5,10 +5,9 @@ function getMemory(callback) {
                 const httpTabs = tabs.filter((tab) => /^http/.test(tab.url));
                 const results = {};
                 let waiting = httpTabs.length;
-                
+
                 httpTabs.forEach((tab) => {
-                        console.log(tab.timestamp)
-                        chrome.tabs.highlight({'tabs': tab.id}, function() {});
+                        chrome.tabs.highlight({ 'tabs': tab.id }, function () { });
                         chrome.tabs.executeScript(tab.id, { code: 'window.performance.memory.usedJSHeapSize' }, (memory) => {
                                 results[tab.id] = { id: tab.id, memory: memory[0], title: tab.title };
                                 waiting--;
@@ -41,6 +40,26 @@ function rearrange(res) {
 
 function sortTab() {
         getMemory((res) => rearrange(res));
+}
+
+async function sortTabTime() {
+        await chrome.storage.local.get(["tabCreation"], async (result) => {
+                let res = result["tabCreation"]
+                var sortable = [];
+                for (var tabid in res) {
+                        sortable.push([tabid, res[tabid]]);
+                }
+
+                sortable.sort(function (a, b) {
+                        return a[1] - b[1];
+                });
+
+                for (let i = 0; i < sortable.length; i++) {
+                        chrome.tabs.move(parseInt(sortable[i][0], 10), {
+                                'index': i
+                        });
+                }
+        })
 }
 
 function selectRow() {
@@ -116,38 +135,82 @@ function scheduleClose() {
 
 getMemory((res) => {
 
-        chrome.storage.local.get(['activeTimers'], (activeTimersres) => {
+        chrome.storage.local.get(['activeTimers'], async (activeTimersres) => {
                 let activeTimers = activeTimersres["activeTimers"];
-                for (tabid in res) {
-                        let clockimg = document.createElement("img");
-                        clockimg.src = "clock.png";
-                        let row = document.createElement("tr");
-                        let clock = document.createElement("td");
-                        let name = document.createElement("td");
-                        let mem = document.createElement("td");
+                await chrome.storage.local.get(["tabCreation"], async (result) => {
 
-                        row.id = tabid;
-                        clock.classList.add("clock");
-                        name.classList.add("tabname");
-                        mem.classList.add("tabmem");
+                        let creationTime = result["tabCreation"];
+                        console.log(creationTime)
+                        for (tabid in res) {
+                                let clockimg = document.createElement("img");
+                                clockimg.src = "clock.png";
+                                let row = document.createElement("tr");
+                                let clock = document.createElement("td");
+                                let name = document.createElement("td");
+                                let time = document.createElement("td");
+                                let mem = document.createElement("td");
 
-                        if (!activeTimers.some((obj) => obj.tabid == tabid)) {
-                                clockimg.classList.add("hide");
+                                row.id = tabid;
+                                row.draggable = true
+                                clock.classList.add("clock");
+                                name.classList.add("tabname");
+                                time.classList.add("tabtime")
+                                mem.classList.add("tabmem");
+
+                                if (!activeTimers.some((obj) => obj.tabid == tabid)) {
+                                        clockimg.classList.add("hide");
+                                }
+                                clockimg.classList.add("clockimg");
+                                clock.append(clockimg);
+                                name.textContent = res[tabid].title;
+                                time.textContent = creationTime[tabid]
+                                mem.textContent = (res[tabid].memory / 1000000).toFixed(2);
+                                row.append(clock);
+                                row.append(name);
+                                row.append(time)
+                                row.append(mem);
+                                row.addEventListener("click", selectRow);
+                                document.getElementById("tablist").getElementsByTagName("tbody")[0].append(row);
                         }
-                        clockimg.classList.add("clockimg");
-                        clock.append(clockimg);
-                        name.textContent = res[tabid].title;
-                        mem.textContent = (res[tabid].memory / 1000000).toFixed(2);
-                        row.append(clock);
-                        row.append(name);
-                        row.append(mem);
-                        row.addEventListener("click", selectRow);
-                        document.getElementById("tablist").getElementsByTagName("tbody")[0].append(row);
-                }
+                });
 
         });
 });
 
+let key = document.querySelectorAll('.tablist tr');
+let draggedRow = null;
+
+key.forEach((table, index) => {
+        table.addEventListener('dragstart', function (event) {
+                if (event.target.tagName === 'TD') {
+                        draggedRow = event.target.parentNode;
+                }
+        });
+
+        table.addEventListener('dragover', function (event) {
+                event.preventDefault();
+
+                if (event.target.tagName === 'TD') {
+                        let targetRow = event.target.parentNode;
+                        let targetIndex = Array.from(targetRow.parentNode.children).indexOf(targetRow);
+                        let draggedIndex = Array.from(draggedRow.parentNode.children).indexOf(draggedRow);
+
+                        if (targetIndex > draggedIndex) {
+                                targetRow.after(draggedRow);
+                        } else if (targetIndex < draggedIndex) {
+                                targetRow.before(draggedRow);
+                        }
+                }
+        });
+
+        table.addEventListener('dragend', function (event) {
+                draggedRow = null;
+        });
+
+})
+
+
 
 document.getElementById("sortbt").addEventListener("click", sortTab);
+document.getElementById("sortByTime").addEventListener("click", sortTabTime);
 document.getElementById("scheduleclose").addEventListener("click", scheduleClose);

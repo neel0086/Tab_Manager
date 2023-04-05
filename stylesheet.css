@@ -74,48 +74,6 @@ body {
         overflow-y: hidden;
 }
 
-/* table {
-        border-collapse: collapse;
-        text-align: center;
-}
-
-.firstLine {
-        text-align: start;
-}
-
-.firstLine th {
-        border-bottom: 2px outset rgba(255, 255, 255, 0.323);
-        padding-bottom: 1px;
-}
-
-tr {
-        padding-bottom: 1px;
-} */
-
-/* tr {
-        border-top: 1px black;
-        font-size: 18px;
-}
-
-.tabname {
-        width: 150px;
-        font-size: 20px;
-}
-
-.tabmem {
-        width: 30px;
-        padding-left: 30px;
-        font-size: 20px;
-
-}
-
-#tablist {
-        width: 100%;
-        border: black 1px;
-        padding-top: 10px;
-        overflow-y: scroll;
-} */
-
 #tablist {
         font-family: Arial, Helvetica, sans-serif;
         border-collapse: collapse;
@@ -181,20 +139,6 @@ tr {
 }
 
 
-
-/* td {
-        overflow: hidden;
-        white-space: nowrap;
-} */
-
-
-
-/* .clock {
-        width: 10px;
-        max-width: 10px;
-        columns: grey;
-} */
-
 .clockimg {
         width: 20px;
         max-width: 20px;
@@ -239,4 +183,54 @@ svg {
         margin-right: 2rem;
         font-size: 18px;
         font-stretch: extra-expanded;
+}
+
+
+/* Style The Dropdown Button */
+.sort_option {
+        background-color: #4CAF50;
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.sortbtcont {
+        position: relative;
+        display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+        background-color: #f1f1f1
+}
+
+/* Show the dropdown menu on hover */
+.sortbtcont:hover .dropdown-content {
+        display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.sortbtcont:hover .sort_option {
+        background-color: #3e8e41;
 }

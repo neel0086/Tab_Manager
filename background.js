@@ -1,20 +1,22 @@
 var activeTimers = []
+var tabCreation = {}
+
 chrome.storage.local.set({
         "activeTimers": activeTimers
-}, () => {});
+}, () => { });
 
 chrome.runtime.onMessage.addListener(
         function msgHandler(msg) {
                 let timeout = setTimeout(() => {
 
-                        chrome.tabs.remove(msg.tabid, () => {});
+                        chrome.tabs.remove(msg.tabid, () => { });
 
                         activeTimers = activeTimers.filter((obj) => {
                                 obj.timeoutid != timeout
                         });
                         chrome.storage.local.set({
                                 "activeTimers": activeTimers
-                        }, () => {});
+                        }, () => { });
 
                 }, msg.time);
 
@@ -27,6 +29,17 @@ chrome.runtime.onMessage.addListener(
                 activeTimers.push(timerobj);
                 chrome.storage.local.set({
                         "activeTimers": activeTimers
-                }, () => {});
+                }, () => { });
                 return true;
         });
+
+chrome.tabs.onCreated.addListener(function (tab) {
+        // Get the current date/time and store it in storage
+        var dateObj = new Date();
+        var options = { timeZone: 'Asia/Kolkata', hour: 'numeric', minute: 'numeric' };
+        var newdate = dateObj.toLocaleString('en-US', options);
+
+        tabCreation[tab.id] = newdate
+        
+        chrome.storage.local.set({ "tabCreation": tabCreation });
+});
