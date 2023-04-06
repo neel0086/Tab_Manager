@@ -40,6 +40,17 @@ chrome.tabs.onCreated.addListener(function (tab) {
         var newdate = dateObj.toLocaleString('en-US', options);
 
         tabCreation[tab.id] = newdate
-        
+
         chrome.storage.local.set({ "tabCreation": tabCreation });
 });
+
+// searchWikipedia = function (word) {
+//         var query = word.selectionText;
+//         chrome.tabs.create({ url: "https://en.wikipedia.org/w/index.php?search=" + query + "&title=Special%3ASearch&go=Go" });
+// };
+
+// chrome.contextMenus.create({
+//         title: "Search in Wikipedia",
+//         contexts: ['all'],
+//         onclick: searchWikipedia
+// });

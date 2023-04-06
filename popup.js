@@ -177,37 +177,7 @@ getMemory((res) => {
         });
 });
 
-let key = document.querySelectorAll('.tablist tr');
-let draggedRow = null;
 
-key.forEach((table, index) => {
-        table.addEventListener('dragstart', function (event) {
-                if (event.target.tagName === 'TD') {
-                        draggedRow = event.target.parentNode;
-                }
-        });
-
-        table.addEventListener('dragover', function (event) {
-                event.preventDefault();
-
-                if (event.target.tagName === 'TD') {
-                        let targetRow = event.target.parentNode;
-                        let targetIndex = Array.from(targetRow.parentNode.children).indexOf(targetRow);
-                        let draggedIndex = Array.from(draggedRow.parentNode.children).indexOf(draggedRow);
-
-                        if (targetIndex > draggedIndex) {
-                                targetRow.after(draggedRow);
-                        } else if (targetIndex < draggedIndex) {
-                                targetRow.before(draggedRow);
-                        }
-                }
-        });
-
-        table.addEventListener('dragend', function (event) {
-                draggedRow = null;
-        });
-
-})
 
 
 
